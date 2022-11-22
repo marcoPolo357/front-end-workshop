@@ -1,0 +1,22 @@
+.img-fluid {
+    width: 100%;
+}
+
+#hero-section {
+    background-image: url(img/hero.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+#about {
+    background-color: #222222;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+#copyright {
+    background-color: #111111;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
