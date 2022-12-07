@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Assignment 2 - Website Building</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,700,0,0" />
+        <style>
+            body {
+                box-sizing: border-box;
+                font-family: sans-serif;
+            }
+
+            #login-container {
+                width: 460px;
+                margin: 0 auto;
+                position: relative;
+            }
+
+            form label,
+            form input {
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            form input {
+                padding: 8px;
+            }
+
+            form label {
+                font-weight: bold;
+            }
+
+            form div {
+                margin: 16px 0px;
+            }
+
+            .material-symbols-outlined {
+                position: absolute;
+            }
+
+            #user-icon {
+                top: 24px;
+                left: 430px;
+            }
+
+            #pass-icon {
+                top: 94px;
+                left: 430px;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <script src="js/jquery-3.6.1.slim.min.js"></script>
+
+        <div id="login-container">
+
+            <form>
+                <div>
+                    <label for="username">Username:</label>
+                    <input id="username" type="text">
+                    <span id="user-icon" class="material-symbols-outlined"></span>
+                </div>
+
+                <div>
+                    <label for="password">Password:</label>
+                    <input id="password" type="password">
+                    <span id="pass-icon" class="material-symbols-outlined"></span>
+
+                </div>
+
+                <input type="button" value="Login" id="login">
+            </form>
+
+            <p id="user-error"></p>
+            <p id="pass-error"></p>
+
+        </div>
+
+        <script>
+            $('#login').click(function (){
+                var username = $("#username").val();
+                var password = $("#password").val();
+                var userCheck = false;
+                var passCheck = false;
+
+                if (username == ''){
+                    $("#user-error").text('please, enter username');
+                    $("#username").css("border", "2px solid red");
+                    $("#user-icon").text("close");
+                    $("#user-icon").css("color", "red");
+                }
+                else if (username != '' && username != 'new_user'){
+                    $("#user-error").text('please, enter valid username');
+                    $("#username").css("border", "2px solid red");
+                    $("#user-icon").text("close");
+                    $("#user-icon").css("color", "red");
+                }
+                else {
+                    $("#username").css("border", "2px solid green");
+                    $("#user-error").text('');
+                    $("#user-icon").text("check");
+                    $("#user-icon").css("color", "green");
+                    userCheck = true;
+                }
+
+                if (password == ''){
+                    $("#pass-error").text('please, enter password');
+                    $("#password").css("border", "2px solid red");
+                    $("#pass-icon").text("close");
+                    $("#pass-icon").css("color", "red");
+                }
+                else if (password != '' && password != '123456789'){
+                    $("#pass-error").text('please, enter valid password');
+                    $("#password").css("border", "2px solid red");
+                    $("#pass-icon").text("close");
+                    $("#pass-icon").css("color", "red");
+                }
+                else {
+                    $("#password").css("border", "2px solid green");
+                    $("#pass-error").text('');
+                    $("#pass-icon").text("check");
+                    $("#pass-icon").css("color", "green");
+                    passCheck = true;
+                }
+
+                if (passCheck == true && userCheck == true){
+                    $("#user-error").text('Login successful!');
+                    $("#pass-error").text('');
+                }
+            });
+            
+        </script>
+
+    </body>
+</html>
