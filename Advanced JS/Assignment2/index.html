@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <title>Adv. JS - Assignment 2</title>
+
+        <link rel="stylesheet" type="text/css" href="styles.css"> 
+
+    </head>
+
+    <body>
+
+        <button id="get-text-btn">Get Data</button>
+        <div id="loader"></div>
+        <div id="display" style="white-space: pre-wrap;"></div>
+
+        <script>
+
+            class Student {
+
+                constructor(name, address, phone, course) {
+                    this.name = name;
+                    this.address = address;
+                    this.phone = phone;
+                    this.course = course;
+                }
+
+                getInfo() {
+                    return "Name: " + this.name + "\n" +
+                    "Address: " + this.address + "\n" +
+                    "Phone: " + this.phone + "\n" +
+                    "Course: " + this.course
+                }
+            }
+
+            let button = document.getElementById("get-text-btn");
+            let loader = document.getElementById("loader");
+
+            button.addEventListener("click", function() {
+
+                getData();
+
+            });
+
+            async function getData(){
+
+                loader.style.display = "inline-block";
+
+                const element = document.getElementById("display");
+                element.replaceChildren();
+
+                try{
+                    let response = await fetch('https://v-dresevic.github.io/Advanced-JavaScript-Programming/data/students.txt');
+
+                    if(response.status !== 200) {
+                        throw new Error("Error while reading file.");
+                    }
+                    
+                    let text = await response.text();
+
+                    let textArray = text.split("\n");
+
+                    for (let i = 0; i < textArray.length; i += 4) {
+                        var student = new Student(textArray[i], textArray[i+1], textArray[i+2], textArray[i+3]);
+                        const para = document.createElement("p");
+                        const node = document.createTextNode(student.getInfo());
+                        para.appendChild(node);
+                        const element = document.getElementById("display");
+                        element.appendChild(para);
+                    }
+
+                } catch(err){
+                    alert("Fetch problem: " + err.message);
+                }finally{
+                    loader.style.display = "none";
+                }
+
+            }
+
+        </script>
+
+    </body>
+
+</html>
