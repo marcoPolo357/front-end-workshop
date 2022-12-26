@@ -1,0 +1,70 @@
+<div class="row g-0">
+  <div class="col-12">
+    <mat-toolbar color="primary">
+      <span>Phonebook</span>
+    </mat-toolbar>
+  </div>
+  <div class="col-12">
+    <div class="container">
+      <div class="row g-0 align-items-center">
+        <div class="col-12 mt-5">
+          <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input
+              matInput
+              [(ngModel)]="new_entry.name"
+              placeholder="John Doe"
+            />
+          </mat-form-field>
+
+          <mat-form-field class="ms-3" appearance="outline">
+            <mat-label>Phone</mat-label>
+            <input
+              matInput
+              [(ngModel)]="new_entry.phone"
+              placeholder="+381xxxxxxxxx"
+            />
+          </mat-form-field>
+
+          <button
+            class="ms-3"
+            mat-flat-button
+            color="primary"
+            [disabled]="!new_entry.name || !new_entry.phone"
+            (click)="addNewItemToDirectory()"
+          >
+            Add to Phonebook
+          </button>
+        </div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Phone</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of directory; let index = index">
+              <th class="align-middle" scope="row">{{ index + 1 }}</th>
+              <td class="align-middle">{{ item.name }}</td>
+              <td class="align-middle">{{ item.phone }}</td>
+              <td class="align-middle">
+                <button
+                  mat-icon-button
+                  color="warn"
+                  matTooltip="Delete item"
+                  [matTooltipPosition]="'right'"
+                  (click)="removeItemFromDirectory(index)"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
